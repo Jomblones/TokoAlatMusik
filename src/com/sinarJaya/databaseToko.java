@@ -51,6 +51,6 @@ public class databaseToko {
     
     @Override
     public String toString() {
-        return "Merek : "+merek+"\nKategori : "+kategori+"\nStok : "+stok+"\nHarga : "+harga+"\nJenis : "+jenis+"\n";
+        return "Merek : "+merek+"\nKategori : "+kategori+"\nStok : "+stok+"\nHarga : Rp. "+harga+"\nJenis : "+jenis+"\n";
     }
 }

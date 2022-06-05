@@ -2,6 +2,8 @@ package com.sinarJaya;
 
 import java.util.*;
 
+import javax.lang.model.util.ElementScanner6;
+
 
 public class Main {
 
@@ -22,12 +24,16 @@ public class Main {
         ArrayList<databaseToko> dataToko = new ArrayList<>();
         ArrayList<keranjang> dataKeranjang = new ArrayList<>();
 
-        dataToko.add(new databaseToko("Ibanez RG", "Gitar Elektrik", 2, 5000000.0, "Baru"));
-        dataToko.add(new databaseToko("Fender Stratocaster", "Gitar Elektrik", 2, 4500000.0, "Baru"));
-        dataToko.add(new databaseToko("Yamaha F-310", "Gitar Akustik", 5, 2000000.0, "Bekas"));
+        dataToko.add(new databaseToko("Ibanez RG", "Gitar Elektrik", 2, 500.0, "Baru"));
+        dataToko.add(new databaseToko("Fender Stratocaster", "Gitar Elektrik", 2, 450.0, "Baru"));
+        dataToko.add(new databaseToko("Yamaha F-310", "Gitar Akustik", 5, 200.0, "Bekas"));
 
+        double totalHarga=0;
+        double hargaBarang =0;
+        int jumlahBarang=0;
+        double totalBelanja=0;
         int randomNumber;
-        double d;
+        double d=0;
         double hargaJual=0;
         int exit = 0;
         while (exit != 1) {
@@ -35,7 +41,8 @@ public class Main {
             System.out.println("1. Beli Alat Musik");
             System.out.println("2. Jual Alat Musik");
             System.out.println("3. Cek Keranjang");
-            System.out.println("4. Keluar");
+            System.out.println("4. Checkout");
+            System.out.println("5. Keluar");
             System.out.print("Masukkan pilihan : ");
             int pilihan = sc.nextInt();
             sc.nextLine();
@@ -111,7 +118,7 @@ public class Main {
                 String merek = sc.nextLine();
                 System.out.println("Kategori (Gitar Elektrik/Gitar Akustik/Drum Elektrik/Keyboard Elektrik) : ");
                 String kategori = sc.nextLine();
-                System.out.println("Harga Beli : ");
+                System.out.println("Harga Beli : $ ");
                 int hargabeli = sc.nextInt();
                 sc.nextLine();
                 int kondisi=100;
@@ -122,29 +129,31 @@ public class Main {
                     sc.nextLine();
                     if(kondisi>99){
                         System.out.println("Anda tidak boleh memasukkan kondisi 100%");
-                        continue;
+                        break;
                     }
-                    else{
+                    else if(kondisi<0){
                         System.out.println("Anda memasukkan input dengan salah");
-                        continue;
+                        break;
                     }
+                    
                 }
+                kondisi=100;
                 if(kondisi>80){
                     d = hargabeli;
-                    hargaJual = d - (0.8*d);
+                    hargaJual = 0.8*d;
                 }
                 else if(kondisi<80 && kondisi>50)
                 {
                     d = hargabeli;
-                    hargaJual = d - (0.5*d);
+                    hargaJual = 0.5*d;
                 }
                 else{
                     System.out.println("Mohon maaf, kami tidak dapat menerima barang anda");
                 }
-                System.out.println("Barang anda akan kami beli seharga : "+hargaJual);
+                System.out.println("Barang anda akan kami beli seharga : $"+hargaJual);
                 System.out.println("Kami akan mengirim uangnya setelah melalui proses inspeksi oleh tim kami");
                 System.out.println("Mohon tunggu sejenak...");
-                
+
                 wait(3000);
                 randomNumber = rand.nextInt(2);
                 if(randomNumber==1)
@@ -153,9 +162,9 @@ public class Main {
                     System.out.println(
                         "Merek : "+merek+
                         "\nKategori : "+kategori+
-                        "\nHarga Beli : "+hargabeli+
-                        "\nKondisi : "+kondisi+
-                        "\nHarga Jual : "+hargaJual+
+                        "\nHarga Beli : $"+hargabeli+
+                        "\nKondisi : "+kondisi+"%"+
+                        "\nHarga Jual : $"+hargaJual+
                         "\n");
                     System.out.println("Barang anda telah berhasil melalui proses inspeksi dari tim kami");
                     System.out.println("Total Saldo Anda = "+hargaJual);
@@ -164,7 +173,7 @@ public class Main {
                 else{
                     System.out.println("===========================================================================");
                     System.out.println("Mohon maaf barang yang anda jual tidak memenuhi kriteria inspeksi dari tim kami");
-                    System.out.println("Total Saldo Anda = "+0);
+                    System.out.println("Total Saldo Anda = $"+0);
                 }
                 
             }
@@ -177,6 +186,7 @@ public class Main {
                     {
                         System.out.println("\nNomor. "+(i+1));
                         System.out.println(dataKeranjang.get(i));
+                        
                     }
                     
                 }
@@ -185,11 +195,25 @@ public class Main {
                 }
                 
             }
-
             else if(pilihan==4){
+                for(int i =0;i<dataKeranjang.size();i++){
+                    hargaBarang = dataKeranjang.get(i).getHarga();
+                    jumlahBarang = dataKeranjang.get(i).getJumlah();
+                    totalHarga = hargaBarang*jumlahBarang;
+                    totalBelanja = totalBelanja + totalHarga;
+                }
+                System.out.println("Total Belanja Anda");
+            }
+
+            else if(pilihan==5){
                 System.out.println("Terimakasih Telah Berbelanja di Toko Kami");
                 sc.close();
                 exit=1;
+            }
+            else{
+                System.out.println("Masukkan inputan dengan benar");
+                exit=1;
+                sc.close();
             }
         }
 
