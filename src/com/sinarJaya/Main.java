@@ -2,9 +2,6 @@ package com.sinarJaya;
 
 import java.util.*;
 
-import javax.lang.model.util.ElementScanner6;
-
-
 public class Main {
 
     static void wait(int ms)
