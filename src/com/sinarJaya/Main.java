@@ -37,7 +37,8 @@ public class Main {
         double hargaJual=0;
         int exit = 0;
         while (exit != 1) {
-            System.out.println("\n\t\tSelamat Datang \n\tdi Toko Alat Musik Sinar Jaya\n");
+            System.out.println("\n=====================================================================");
+            System.out.println("\t\tSelamat Datang \n\tdi Toko Alat Musik Sinar Jaya\n");
             System.out.println("1. Beli Alat Musik");
             System.out.println("2. Jual Alat Musik");
             System.out.println("3. Cek Keranjang");
@@ -46,6 +47,7 @@ public class Main {
             System.out.print("Masukkan pilihan : ");
             int pilihan = sc.nextInt();
             sc.nextLine();
+            System.out.println("\n======================================================================\n");
 
             if (pilihan == 1) {
                 pilihan=0;
@@ -68,7 +70,7 @@ public class Main {
                         dataToko.get(newNomor).setStok(dataToko.get(newNomor).getStok()-1);
                         System.out.println("Barang sukses masuk ke keranjang!");
                         String merekGitarPilihan = dataToko.get(newNomor).getMerek();
-                        // System.out.println(merekGitarPilihan);
+                        System.out.println(merekGitarPilihan);
 
                         if(!dataKeranjang.isEmpty())
                         {
@@ -114,17 +116,17 @@ public class Main {
 
             else if(pilihan==2){
                 System.out.println("Masukkan keterangan barang yang anda jual");
-                System.out.println("Merek : ");
+                System.out.print("Merek : ");
                 String merek = sc.nextLine();
-                System.out.println("Kategori (Gitar Elektrik/Gitar Akustik/Drum Elektrik/Keyboard Elektrik) : ");
+                System.out.print("Kategori (Gitar Elektrik/Gitar Akustik/Drum Elektrik/Keyboard Elektrik) : ");
                 String kategori = sc.nextLine();
-                System.out.println("Harga Beli : $ ");
+                System.out.print("Harga Beli : $ ");
                 int hargabeli = sc.nextInt();
                 sc.nextLine();
                 int kondisi=100;
                 while(kondisi>99 || kondisi<0)
                 {
-                    System.out.println("Kondisi : (0%-99%)");
+                    System.out.print("Kondisi : (0%-99%)");
                     kondisi = sc.nextInt();
                     sc.nextLine();
                     if(kondisi>99){
@@ -158,7 +160,7 @@ public class Main {
                 randomNumber = rand.nextInt(2);
                 if(randomNumber==1)
                 {
-                    System.out.println("===========================================================================");
+                    System.out.println("\n===========================================================================\n");
                     System.out.println(
                         "Merek : "+merek+
                         "\nKategori : "+kategori+
@@ -167,7 +169,7 @@ public class Main {
                         "\nHarga Jual : $"+hargaJual+
                         "\n");
                     System.out.println("Barang anda telah berhasil melalui proses inspeksi dari tim kami");
-                    System.out.println("Total Saldo Anda = "+hargaJual);
+                    System.out.println("Total Saldo Anda = $"+hargaJual);
                     dataToko.add(new databaseToko(merek, kategori, 1, hargaJual, "Bekas"));
                 }
                 else{
@@ -225,11 +227,11 @@ public class Main {
                         wait(500);
                         System.out.println("Mohon Tunggu...");
                         wait(1000);
-                        System.out.println("\n===========================================================================");
+                        System.out.println("\n===========================================================================\n");
                         System.out.println("Pembayaran Berhasil Sejumlah = "+totalBelanja);
                         System.out.println("Dengan Nomor Kartu Debit/Kredit = "+nomorKartu);
                         System.out.println("Terimakasih Telah Berbelanja di Toko Sinar Jaya");
-                        System.out.println("===========================================================================\n");
+                        System.out.println("\n===========================================================================\n");
                         dataKeranjang.clear();
                         totalBelanjaan.clear();
                         exit=1;
@@ -245,12 +247,12 @@ public class Main {
                             dataKeranjang.clear();
                         }
                         else{
-                            System.out.println("\n==========================================================================");
+                            System.out.println("\n==========================================================================\n");
                             System.out.println("Pembayaran Berhasil Sejumlah = $"+totalBelanja);
                             DjumlahUang = DjumlahUang-totalBelanja;
                             System.out.println("Kembalian Anda Sejumlah = $"+DjumlahUang);
                             System.out.println("Terimakasih Telah Berbelanja di Toko Sinar Jaya");
-                            System.out.println("===========================================================================\n");
+                            System.out.println("\n===========================================================================\n");
                             dataKeranjang.clear();
                         totalBelanjaan.clear();
                         exit=1;
@@ -263,11 +265,11 @@ public class Main {
                         wait(500);
                         System.out.println("Mohon Tunggu...");
                         wait(1000);
-                        System.out.println("\n===========================================================================");
+                        System.out.println("\n===========================================================================\n");
                         System.out.println("Pembayaran Berhasil Sejumlah = "+totalBelanja);
                         System.out.println("Dengan Nomor e-Wallet = "+nomorKartu);
                         System.out.println("Terimakasih Telah Berbelanja di Toko Sinar Jaya");
-                        System.out.println("===========================================================================\n");
+                        System.out.println("\n===========================================================================\n");
                         dataKeranjang.clear();
                         totalBelanjaan.clear();
                         exit=1;
