@@ -51,7 +51,7 @@ public class keranjang {
     
     @Override
     public String toString() {
-        return "Merek : "+merek+"\nKategori : "+kategori+"\nJumlah : "+jumlah+"\nHarga : Rp. "+harga+"\nJenis : "+jenis+"\n";
+        return "Merek : "+merek+"\nKategori : "+kategori+"\nJumlah : "+jumlah+"\nHarga : $ "+harga+"\nJenis : "+jenis+"\n";
     }
 }
 

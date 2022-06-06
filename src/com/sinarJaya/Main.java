@@ -20,6 +20,7 @@ public class Main {
         Random rand = new Random();
         ArrayList<databaseToko> dataToko = new ArrayList<>();
         ArrayList<keranjang> dataKeranjang = new ArrayList<>();
+        ArrayList<Double> totalBelanjaan = new ArrayList<>();
 
         dataToko.add(new databaseToko("Ibanez RG", "Gitar Elektrik", 2, 500.0, "Baru"));
         dataToko.add(new databaseToko("Fender Stratocaster", "Gitar Elektrik", 2, 450.0, "Baru"));
@@ -36,7 +37,7 @@ public class Main {
         double hargaJual=0;
         int exit = 0;
         while (exit != 1) {
-            System.out.println("\t\tSelamat Datang \n\tdi Toko Alat Musik Sinar Jaya");
+            System.out.println("\n\t\tSelamat Datang \n\tdi Toko Alat Musik Sinar Jaya\n");
             System.out.println("1. Beli Alat Musik");
             System.out.println("2. Jual Alat Musik");
             System.out.println("3. Cek Keranjang");
@@ -59,7 +60,7 @@ public class Main {
                 sc.nextLine();
                 int newNomor = nomor-1;
                 
-                if(newNomor<=dataToko.size())
+                if(newNomor<dataToko.size())
                 {
                     if(dataToko.get(newNomor).getStok()!=0)
                     {
@@ -67,7 +68,7 @@ public class Main {
                         dataToko.get(newNomor).setStok(dataToko.get(newNomor).getStok()-1);
                         System.out.println("Barang sukses masuk ke keranjang!");
                         String merekGitarPilihan = dataToko.get(newNomor).getMerek();
-                        System.out.println(merekGitarPilihan);
+                        // System.out.println(merekGitarPilihan);
 
                         if(!dataKeranjang.isEmpty())
                         {
@@ -76,7 +77,7 @@ public class Main {
                                 String merekGitarKeranjang = dataKeranjang.get(i).getMerek();
                                 int jumlahGitarKeranjang = dataKeranjang.get(i).getJumlah();
                                 if(merekGitarPilihan==merekGitarKeranjang && jumlahGitarKeranjang>0 ){
-                                    System.out.println(dataKeranjang.get(i).getMerek());
+                                    // System.out.println(dataKeranjang.get(i).getMerek());
                                     dataKeranjang.get(i).setJumlah(dataKeranjang.get(i).getJumlah()+1);
                                     break;
                                 }
@@ -86,7 +87,7 @@ public class Main {
                                         continue;
                                     }
                                     else{
-                                        System.out.println(dataKeranjang.get(i).getMerek());
+                                        // System.out.println(dataKeranjang.get(i).getMerek());
                                     dataKeranjang.add(new keranjang(dataToko.get(newNomor).getMerek(), dataToko.get(newNomor).getKategori(), 1, dataToko.get(newNomor).getHarga(), dataToko.get(newNomor).getJenis()));
                                     break;
                                     }
@@ -199,20 +200,97 @@ public class Main {
                     hargaBarang = dataKeranjang.get(i).getHarga();
                     jumlahBarang = dataKeranjang.get(i).getJumlah();
                     totalHarga = hargaBarang*jumlahBarang;
-                    totalBelanja = totalBelanja + totalHarga;
+                    totalBelanjaan.add(totalHarga);    
                 }
-                System.out.println("Total Belanja Anda");
+                if(!dataKeranjang.isEmpty())
+                {
+                    System.out.println("Total Belanja Anda");
+                    for(int i=0; i<totalBelanjaan.size(); i++)
+                    {
+                        totalBelanja += totalBelanjaan.get(i);
+                    }
+                    System.out.println("\nTotal Belanja Anda sejumlah = $"+totalBelanja);
+                    System.out.println("Metode Pembayaran : ");
+                    System.out.println("1. Debit/Kredit");
+                    System.out.println("2. Cash");
+                    System.out.println("3. e-Wallet");
+                    System.out.print("Silahkan masukan metode pembayaran : ");
+                    int metodePembayaran = sc.nextInt();
+                    sc.nextLine();
+
+                    if(metodePembayaran==1){
+                        System.out.print ("\nMasukkan nomor kartu Debit/Kredit : ");
+                        String nomorKartu = sc.nextLine();
+                        System.out.println("\nProses Transaksi Sedang Berlangsung");
+                        wait(500);
+                        System.out.println("Mohon Tunggu...");
+                        wait(1000);
+                        System.out.println("\n===========================================================================");
+                        System.out.println("Pembayaran Berhasil Sejumlah = "+totalBelanja);
+                        System.out.println("Dengan Nomor Kartu Debit/Kredit = "+nomorKartu);
+                        System.out.println("Terimakasih Telah Berbelanja di Toko Sinar Jaya");
+                        System.out.println("===========================================================================\n");
+                        dataKeranjang.clear();
+                        totalBelanjaan.clear();
+                        exit=1;
+                    }
+                    else if(metodePembayaran==2){
+                        System.out.print("Masukkan Jumlah Uang Anda = $ ");
+                        int jumlahUang = sc.nextInt();
+                        double DjumlahUang = jumlahUang;
+                        if(DjumlahUang<totalBelanja){
+                            System.out.println("Mohon Maaf Uang anda tidak cukup");
+                            System.out.println("Silahkan ulangi transaksi anda");
+                            totalBelanjaan.clear();
+                            dataKeranjang.clear();
+                        }
+                        else{
+                            System.out.println("\n==========================================================================");
+                            System.out.println("Pembayaran Berhasil Sejumlah = $"+totalBelanja);
+                            DjumlahUang = DjumlahUang-totalBelanja;
+                            System.out.println("Kembalian Anda Sejumlah = $"+DjumlahUang);
+                            System.out.println("Terimakasih Telah Berbelanja di Toko Sinar Jaya");
+                            System.out.println("===========================================================================\n");
+                            dataKeranjang.clear();
+                        totalBelanjaan.clear();
+                        exit=1;
+                        }
+                    }
+                    else if(metodePembayaran==3){
+                        System.out.print("Masukkan nomor e-Wallet : ");
+                        String nomorKartu = sc.nextLine();
+                        System.out.println("\nProses Transaksi Sedang Berlangsung");
+                        wait(500);
+                        System.out.println("Mohon Tunggu...");
+                        wait(1000);
+                        System.out.println("\n===========================================================================");
+                        System.out.println("Pembayaran Berhasil Sejumlah = "+totalBelanja);
+                        System.out.println("Dengan Nomor e-Wallet = "+nomorKartu);
+                        System.out.println("Terimakasih Telah Berbelanja di Toko Sinar Jaya");
+                        System.out.println("===========================================================================\n");
+                        dataKeranjang.clear();
+                        totalBelanjaan.clear();
+                        exit=1;
+                    }
+                    else{
+                        System.out.println("Masukkan pilihan dengan benar!");
+                    }
+                }
+                else{
+                    System.out.println("\nKeranjang Kosong, Silahkan belanja terlebih dahulu\n");
+                }
             }
 
             else if(pilihan==5){
-                System.out.println("Terimakasih Telah Berbelanja di Toko Kami");
+                System.out.println("\nTerimakasih Telah Berbelanja di Toko Kami");
                 sc.close();
                 exit=1;
             }
             else{
                 System.out.println("Masukkan inputan dengan benar");
-                exit=1;
                 sc.close();
+                exit=1;
+
             }
         }
 
