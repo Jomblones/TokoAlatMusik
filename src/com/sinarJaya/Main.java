@@ -24,6 +24,8 @@ public class Main {
         dataToko.add(new databaseToko("Ibanez RG", "Gitar Elektrik", 2, 500.0, "Baru"));
         dataToko.add(new databaseToko("Fender Stratocaster", "Gitar Elektrik", 2, 450.0, "Baru"));
         dataToko.add(new databaseToko("Yamaha F-310", "Gitar Akustik", 5, 200.0, "Bekas"));
+        dataToko.add(new databaseToko("Yamaha DD75", "Drum  Elektrik", 5, 350.0, "Baru"));
+        dataToko.add(new databaseToko("Yamaha PSR E-473", "Keyboard Elektrik", 5, 500.0, "Bekas"));
 
         double totalHarga=0;
         double hargaBarang =0;
